@@ -3,11 +3,13 @@
 #include <array>
 #include <iostream>
 
+#include <fmt/core.h>
+#include <fmt/ranges.h>
+
 int main() {
 	std::array arr{ 1, 2, 3, 4 };
 
-	for (int num : arr)
-		std::cout << num << '\n';
+	fmt::print("{}", arr);
 
 	return 0;
 }
