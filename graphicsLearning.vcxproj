@@ -203,6 +203,7 @@
   <ItemGroup>
     <ClInclude Include="src\include\stdafx.h" />
     <ClInclude Include="src\util\asyncReadFile.h" />
+    <ClInclude Include="src\util\shape.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json" />

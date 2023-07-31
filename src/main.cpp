@@ -10,13 +10,20 @@
 #include <optional>
 
 #include "util/asyncReadFile.h"
+#include "util/shape.h"
+
+
+constexpr shp::triangle triangle = {{
+	{ -0.6f, -0.4f, 1.f, 0.f, 0.f },
+	{  0.6f, -0.4f, 0.f, 1.f, 0.f },
+	{  0.f,   0.6f, 0.f, 0.f, 1.f }
+}};
+
+constexpr auto vertexPath = "assets/vertex.glsl";
+constexpr auto fragmentPath = "assets/fragment.glsl";
 
 
 int main() {
-	if (auto file = file_to_string("assets/data.txt")) {
-		std::cout << file.value() << '\n';
-	}
-
 	// Init lib
 	if (!glfwInit()) return -1;
 
