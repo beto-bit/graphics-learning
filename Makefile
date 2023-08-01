@@ -40,6 +40,7 @@ DEPS := $(patsubst %.o,%.d,${OBJS})
 
 # Targets
 .DEFAULT_GOAL := all
+.PHONY: all
 all: ${TARGET_EXEC}
 
 ${TARGET_EXEC}: ${OBJS}
@@ -49,20 +50,15 @@ ${TARGET_EXEC}: ${OBJS}
 ${BUILD_DIR}/%.o: %.cpp
 	@ mkdir -p $(@D)
 	@ echo "Compiling $<..."
-	@ ${CXX} ${CXXFLAGS} $< -c -o $@
+	@ ${CXX} ${CXXFLAGS} -O2 $< -c -o $@
 
 
+
+# Run and clean
 .PHONY: run
 run: ${TARGET_EXEC}
+	@ echo "Starting..."
 	@ ./${TARGET_EXEC}
-
-.PHONY: test
-test:
-	@echo ${SRCS}
-	@echo ${OBJS}
-	@echo ${HDRS}
-	@echo ${DEPS}
-	@echo ${X11FLAGS}
 
 .PHONY: clean
 clean:
