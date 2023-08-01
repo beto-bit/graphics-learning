@@ -7,6 +7,7 @@ TARGET_EXEC :=	main
 SRC_DIR :=		./src
 INCLUDE_DIR :=	./src/include
 BUILD_DIR :=	./build
+PCH_SRC :=		./src/include/stdafx.h
 VCPKG_DIR :=	./vcpkg_installed/x64-linux
 
 
@@ -19,7 +20,7 @@ WFLAGS := -Wall -Wextra -Wpedantic -Wdeprecated -Wundef -Wunused \
 		  -Wcast-qual -Wcast-align -Wconversion \
 		  -Werror=return-local-addr -Werror=return-type
 
-CXXFLAGS := -std=c++20 -flto -MD -MP ${WFLAGS} \
+CXXFLAGS := -std=c++20 -flto ${WFLAGS} \
 			-I ${INCLUDE_DIR} \
 			-isystem ${VCPKG_DIR}/include
 
@@ -34,6 +35,7 @@ SRCS := $(shell find ${SRC_DIR} -type f -name "*.cpp")
 OBJS := $(patsubst %.cpp,${BUILD_DIR}/%.o,${SRCS})
 HDRS := $(shell find ${SRC_DIR} -type f -name "*.h")
 
+PCH_OUT := $(PCH_SRC:.h=.gch)
 DEPS := $(patsubst %.o,%.d,${OBJS})
 -include ${DEPS}
 
@@ -47,11 +49,14 @@ ${TARGET_EXEC}: ${OBJS}
 	@ echo "Linking..."
 	@ ${LD} $^ ${LDFLAGS} -o $@
 
-${BUILD_DIR}/%.o: %.cpp
+${BUILD_DIR}/%.o: %.cpp ${PCH_OUT}
 	@ mkdir -p $(@D)
 	@ echo "Compiling $<..."
-	@ ${CXX} ${CXXFLAGS} -O2 $< -c -o $@
+	@ ${CXX} ${CXXFLAGS} -O2 -MD -MP $< -c -o $@
 
+${PCH_OUT}: ${PCH_SRC}
+	@ echo "Compiling header $<..."
+	@ ${CXX} ${CXXFLAGS} $< -o $@
 
 
 # Run and clean
@@ -63,6 +68,7 @@ run: ${TARGET_EXEC}
 .PHONY: clean
 clean:
 	rm -rf ${TARGET_EXEC} ${BUILD_DIR}
+	rm -rf $(PCH_SRC:.h=.d) $(PCH_SRC:.h=.gch)
 
 compile_flags.txt: Makefile
 	@echo ${CXXFLAGS} | tr ' ' '\n' > $@

@@ -368,3 +368,4 @@ vcpkg_installed/
 # Linux thingies
 build/
 main
+*.gch
