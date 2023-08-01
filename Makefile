@@ -9,6 +9,8 @@ INCLUDE_DIR :=	./src/include
 BUILD_DIR :=	./build
 VCPKG_DIR :=	./vcpkg_installed/x64-linux
 
+
+# Flags
 WFLAGS := -Wall -Wextra -Wpedantic -Wdeprecated -Wundef -Wunused \
 		  -Wunreachable-code -Winvalid-pch -Wctor-dtor-privacy \
 		  -Wshadow -Wmissing-include-dirs -Wredundant-decls \
@@ -17,7 +19,7 @@ WFLAGS := -Wall -Wextra -Wpedantic -Wdeprecated -Wundef -Wunused \
 		  -Wcast-qual -Wcast-align -Wconversion \
 		  -Werror=return-local-addr -Werror=return-type
 
-CXXFLAGS := -std=c++20 -flto ${WFLAGS} \
+CXXFLAGS := -std=c++20 -flto -MD -MP ${WFLAGS} \
 			-I ${INCLUDE_DIR} \
 			-isystem ${VCPKG_DIR}/include
 
@@ -27,20 +29,27 @@ LDFLAGS := -flto \
 		   ${X11FLAGS}
 
 
-# Operations
+# Files, headers, objects and dependencies
 SRCS := $(shell find ${SRC_DIR} -type f -name "*.cpp")
 OBJS := $(patsubst %.cpp,${BUILD_DIR}/%.o,${SRCS})
 HDRS := $(shell find ${SRC_DIR} -type f -name "*.h")
 
+DEPS := $(patsubst %.o,%.d,${OBJS})
+-include ${DEPS}
 
+
+# Targets
+.DEFAULT_GOAL := all
 all: ${TARGET_EXEC}
 
 ${TARGET_EXEC}: ${OBJS}
-	${LD} $^ ${LDFLAGS} -o $@
+	@ echo "Linking..."
+	@ ${LD} $^ ${LDFLAGS} -o $@
 
 ${BUILD_DIR}/%.o: %.cpp
 	@ mkdir -p $(@D)
-	${CXX} ${CXXFLAGS} $^ -c -o $@
+	@ echo "Compiling $<..."
+	@ ${CXX} ${CXXFLAGS} $< -c -o $@
 
 
 .PHONY: run
@@ -52,6 +61,7 @@ test:
 	@echo ${SRCS}
 	@echo ${OBJS}
 	@echo ${HDRS}
+	@echo ${DEPS}
 	@echo ${X11FLAGS}
 
 .PHONY: clean
