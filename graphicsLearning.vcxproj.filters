@@ -35,16 +35,8 @@
     <ClInclude Include="src\util\shape.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\linmath.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="assets\vertex.glsl" />
-    <CopyFileToFolders Include="assets\fragment.glsl" />
-    <CopyFileToFolders Include="assets\data.txt" />
   </ItemGroup>
 </Project>
