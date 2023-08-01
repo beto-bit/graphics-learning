@@ -203,10 +203,39 @@
   <ItemGroup>
     <ClInclude Include="src\include\stdafx.h" />
     <ClInclude Include="src\util\asyncReadFile.h" />
+    <ClInclude Include="src\util\linmath.h" />
     <ClInclude Include="src\util\shape.h" />
   </ItemGroup>
   <ItemGroup>
+    <CopyFileToFolders Include="assets\fragment.glsl">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(DestinationFolders)</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(DestinationFolders)</DestinationFolders>
+      <RootFolder Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assets</RootFolder>
+      <RootFolder Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assets</RootFolder>
+      <DestinationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assets/%(Filename)%(Extension)</DestinationFileName>
+      <DestinationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assets/%(Filename)%(Extension)</DestinationFileName>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="assets\vertex.glsl">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(DestinationFolders)</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(DestinationFolders)</DestinationFolders>
+      <RootFolder Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assets</RootFolder>
+      <RootFolder Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assets</RootFolder>
+      <DestinationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assets/%(Filename)%(Extension)</DestinationFileName>
+      <DestinationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assets/%(Filename)%(Extension)</DestinationFileName>
+    </CopyFileToFolders>
     <None Include="vcpkg.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="assets\data.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(DestinationFolders)</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(DestinationFolders)</DestinationFolders>
+      <RootFolder Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assets</RootFolder>
+      <RootFolder Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assets</RootFolder>
+      <DestinationFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assets/%(Filename)%(Extension)</DestinationFileName>
+      <DestinationFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assets/%(Filename)%(Extension)</DestinationFileName>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
