@@ -33,7 +33,7 @@ LDFLAGS := -flto \
 # Files, headers, objects and dependencies
 SRCS := $(shell find ${SRC_DIR} -type f -name "*.cpp")
 OBJS := $(patsubst %.cpp,${BUILD_DIR}/%.o,${SRCS})
-HDRS := $(shell find ${SRC_DIR} -type f -name "*.h")
+HDRS := $(shell find ${SRC_DIR} -type f -name "*.h" -or -name "*.hpp")
 
 PCH_OUT := $(PCH_SRC:.h=.gch)
 DEPS := $(patsubst %.o,%.d,${OBJS})
