@@ -7,7 +7,7 @@ TARGET_EXEC :=	main
 SRC_DIR :=		./src
 INCLUDE_DIR :=	./src/include
 BUILD_DIR :=	./build
-PCH_SRC :=		./src/include/stdafx.h
+PCH_SRC :=		./src/include/stdafx.hpp
 VCPKG_DIR :=	./vcpkg_installed/x64-linux
 
 
@@ -35,7 +35,7 @@ SRCS := $(shell find ${SRC_DIR} -type f -name "*.cpp")
 OBJS := $(patsubst %.cpp,${BUILD_DIR}/%.o,${SRCS})
 HDRS := $(shell find ${SRC_DIR} -type f -name "*.h" -or -name "*.hpp")
 
-PCH_OUT := $(PCH_SRC:.h=.gch)
+PCH_OUT := $(PCH_SRC:.hpp=.gch)
 DEPS := $(patsubst %.o,%.d,${OBJS})
 -include ${DEPS}
 
@@ -68,7 +68,7 @@ run: ${TARGET_EXEC}
 .PHONY: clean
 clean:
 	rm -rf ${TARGET_EXEC} ${BUILD_DIR}
-	rm -rf $(PCH_SRC:.h=.d) $(PCH_SRC:.h=.gch)
+	rm -rf $(PCH_SRC:.hpp=.d) $(PCH_SRC:.hpp=.gch)
 
 compile_flags.txt: Makefile
 	@echo ${CXXFLAGS} | tr ' ' '\n' > $@
