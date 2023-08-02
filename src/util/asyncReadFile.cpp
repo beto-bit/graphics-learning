@@ -8,7 +8,7 @@
 #include "asyncReadFile.hpp"
 
 std::optional<std::string> file_to_string(
-        const std::string& path
+    const std::string& path
 ) {
 	std::ifstream file{ path };
 
@@ -23,7 +23,7 @@ std::optional<std::string> file_to_string(
 }
 
 std::future<std::optional<std::string>> async_file_to_string(
-        const std::string& path
+    const std::string& path
 ) {
 	return std::async(std::launch::async, file_to_string, path);
 }
