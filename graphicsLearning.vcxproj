@@ -202,9 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\stdafx.hpp" />
-    <ClInclude Include="src\util\asyncReadFile.h" />
     <ClInclude Include="src\util\asyncReadFile.hpp" />
-    <ClInclude Include="src\util\shape.h" />
     <ClInclude Include="src\util\shape.hpp" />
   </ItemGroup>
   <ItemGroup>

@@ -29,12 +29,6 @@
     <ClInclude Include="src\include\stdafx.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\asyncReadFile.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\shape.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\asyncReadFile.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
