@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "stdafx.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include <glad/glad.h>

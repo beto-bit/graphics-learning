@@ -158,7 +158,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>src/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -177,7 +177,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>src/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -201,9 +201,11 @@
     <ClCompile Include="src\util\asyncReadFile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\include\stdafx.h" />
+    <ClInclude Include="src\include\stdafx.hpp" />
     <ClInclude Include="src\util\asyncReadFile.h" />
+    <ClInclude Include="src\util\asyncReadFile.hpp" />
     <ClInclude Include="src\util\shape.h" />
+    <ClInclude Include="src\util\shape.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="vcpkg.json" />

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "stdafx.h"
+#include "stdafx.hpp"
 #include <future>
 #include <string>
 #include <optional>
