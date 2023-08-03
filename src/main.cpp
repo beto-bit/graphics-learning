@@ -4,7 +4,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <array>
 #include <iostream>
+
+#include "util/color.hpp"
 
 
 static void key_callback(
@@ -31,6 +34,7 @@ static void error_callback(
 int main() {
 	constexpr int window_heigth = 640;
 	constexpr int window_width = 480;
+	constexpr util::rgb_float bg_color(77u, 190u, 255u);
 
 	// Init lib
 	if (!glfwInit()) return -1;
@@ -66,7 +70,7 @@ int main() {
 	glViewport(0, 0, window_heigth, window_width);
 
 	// Set color and render
-	glClearColor(0.49f, 0.99f, 0.79f, 1.0f);
+	glClearColor(bg_color.r, bg_color.g, bg_color.b, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Swap front and back buffers

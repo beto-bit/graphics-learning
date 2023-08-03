@@ -1,6 +1,6 @@
 #pragma once
 
-namespace shp {
+namespace util {
 	struct position
 	{
 		float x{};

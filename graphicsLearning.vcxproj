@@ -208,6 +208,7 @@
   <ItemGroup>
     <ClInclude Include="src\include\stdafx.hpp" />
     <ClInclude Include="src\util\asyncReadFile.hpp" />
+    <ClInclude Include="src\util\color.hpp" />
     <ClInclude Include="src\util\shape.hpp" />
   </ItemGroup>
   <ItemGroup>
