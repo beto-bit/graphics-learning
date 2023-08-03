@@ -34,9 +34,9 @@ namespace util {
 			T g_channel,
 			T b_channel
 		) :
-			r(static_cast<u8_t>(r_channel)),
-			g(static_cast<u8_t>(g_channel)),
-			b(static_cast<u8_t>(b_channel))
+			r{ static_cast<u8_t>(r_channel) },
+			g{ static_cast<u8_t>(g_channel) },
+			b{ static_cast<u8_t>(b_channel) }
 		{}
 
 		constexpr rgb_i8(
@@ -44,9 +44,9 @@ namespace util {
 			float g_channel,
 			float b_channel
 		) :
-			r{rgb_float_to_int(r_channel)},
-			g{rgb_float_to_int(g_channel)},
-			b{rgb_float_to_int(b_channel)}
+			r{ rgb_float_to_int(r_channel) },
+			g{ rgb_float_to_int(g_channel) },
+			b{ rgb_float_to_int(b_channel) }
 		{}
 	};
 
@@ -63,13 +63,13 @@ namespace util {
 			T g_channel,
 			T b_channel
 		) :
-			r{rgb_int_to_float(static_cast<u8_t>(r_channel))},
-			g{rgb_int_to_float(static_cast<u8_t>(g_channel))},
-			b{rgb_int_to_float(static_cast<u8_t>(b_channel))}
+			r{ rgb_int_to_float(static_cast<u8_t>(r_channel)) },
+			g{ rgb_int_to_float(static_cast<u8_t>(g_channel)) },
+			b{ rgb_int_to_float(static_cast<u8_t>(b_channel)) }
 		{}
 
 		constexpr rgb_float(float r_channel, float g_channel, float b_channel)
-			: r(r_channel), g(g_channel), b(b_channel)
+			: r{ r_channel }, g{ g_channel }, b{ b_channel }
 		{}
 	};
 }
