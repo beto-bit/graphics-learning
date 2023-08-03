@@ -28,52 +28,58 @@ static void error_callback(
 }
 
 
-
 int main() {
+	constexpr int window_heigth = 640;
+	constexpr int window_width = 480;
+
 	// Init lib
 	if (!glfwInit()) return -1;
 
 	// Min version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	glfwSetErrorCallback(error_callback);
 
 	// Create window
-	GLFWwindow* window = glfwCreateWindow(640, 480, "Funny triangle", nullptr, nullptr);
-
+	GLFWwindow* window = glfwCreateWindow(window_heigth, window_width, "Hi OpenGL", nullptr, nullptr);
 	if (!window) {
 		glfwTerminate();
+		std::cerr << "Failed to create window" << std::endl;
 		return -1;
 	}
+
+	// Make the window's current context
+	glfwMakeContextCurrent(window);
 
 	// Key callbacks
 	glfwSetKeyCallback(window, key_callback);
 
-	// Make the window's current context
-	glfwMakeContextCurrent(window);
 	gladLoadGL();
 
 #ifndef NDEBUG
 	std::cout << "OpenGL version: " << glGetString(GL_VERSION) << '\n';
 #endif
 
-	glfwSwapInterval(1);
+	// Visible area
+	glViewport(0, 0, window_heigth, window_width);
 
+	// Set color and render
+	glClearColor(0.49f, 0.99f, 0.79f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	// Swap front and back buffers
+	glfwSwapBuffers(window);
 
 	// Loop until the user closes the window
 	while (!glfwWindowShouldClose(window))
 	{
-		// Render hete
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		// Swap front and back buffers
-		glfwSwapBuffers(window);
-
 		// Poll for and process events
 		glfwPollEvents();
 	}
 
+	// Clean everything
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
