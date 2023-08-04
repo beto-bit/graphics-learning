@@ -24,9 +24,9 @@ CXXFLAGS := -std=c++20 -flto ${WFLAGS} \
 			-I ${INCLUDE_DIR} \
 			-isystem ${VCPKG_DIR}/include
 
-X11FLAGS := $(shell pkg-config x11 --cflags --libs)
+X11FLAGS := $(shell pkg-config x11 --libs)
 LDFLAGS := -flto \
-		   -L ${VCPKG_DIR}/lib -lfmt -lglad -lglfw3 \
+		   -L ${VCPKG_DIR}/lib -lfmt -lglad -lglfw3 -lrt -lm -ldl\
 		   ${X11FLAGS}
 
 
