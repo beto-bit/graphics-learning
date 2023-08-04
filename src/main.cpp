@@ -11,6 +11,10 @@
 #include "util/color.hpp"
 
 
+// Doing static_cast because GCC doesn't have std::sqrtf.
+// Stick to the standard dammit.
+constexpr float sqrt_of_3 = 1.73205080f;
+
 constexpr auto vertex_shader_src =
 "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
@@ -80,10 +84,7 @@ int main() {
 	constexpr int window_width = 520;
 	constexpr util::rgb_float bg_color(115u, 251u, 211u);
 
-    // Doing static_cast because GCC doesn't have std::sqrtf.
-    // Stick to the standard dammit.
-    const float sqrt_of_3 = static_cast<float>(std::sqrt(3));
-	const std::array vertices {
+	constexpr std::array vertices {
 		-0.5f, -0.5f * sqrt_of_3 / 3, 0.0f,     // lower left corner
 		 0.5f, -0.5f * sqrt_of_3 / 3, 0.0f,     // lower right corner
 		 0.0f,  0.5f * sqrt_of_3 * 2/3, 0.0f    // upper corner
