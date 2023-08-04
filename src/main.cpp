@@ -76,14 +76,14 @@ GLuint create_shader_program(const char* vertex_shdr_src, const char* fragment_s
 
 
 int main() {
-	constexpr int window_heigth = 640;
-	constexpr int window_width = 480;
+	constexpr int window_heigth = 520;
+	constexpr int window_width = 520;
 	constexpr util::rgb_float bg_color(77u, 190u, 255u);
 
 	const std::array vertices {
-		-0.5f, -0.5f * std::sqrtf(3) / 3, 0.0f,
-		 0.5f, -0.5f * std::sqrtf(3) / 3, 0.0f,
-		 0.0f,  0.5f * std::sqrtf(3) * 2/3, 0.0f
+		-0.5f, -0.5f * std::sqrtf(3) / 3, 0.0f,		// lower left corner
+		 0.5f, -0.5f * std::sqrtf(3) / 3, 0.0f,		// lower right corner
+		 0.0f,  0.5f * std::sqrtf(3) * 2/3, 0.0f	// upper corner
 	};
 
 
@@ -113,17 +113,15 @@ int main() {
 
 	gladLoadGL();
 
+	// Visible area
+	glViewport(0, 0, window_heigth, window_width);
+
 #ifndef NDEBUG
 	std::cout << "OpenGL version: " << glGetString(GL_VERSION) << '\n';
 #endif
 
-	// Visible area
-	glViewport(0, 0, window_heigth, window_width);
-
-
 	// Compile shaders
 	GLuint shader_program = create_shader_program(vertex_shader_src, fragment_shader_src);
-
 
 	// Vertex buffer object
 	GLuint VAO, VBO;
@@ -135,21 +133,18 @@ int main() {
 	// Set this VAO as the current
 	glBindVertexArray(VAO);
 
-	// Upload the data into the buffers
+	// Bind the VBO and "upload" the vertices into the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
 
-	// Configure the the Vertex Array so OpenGL knows how to read the VBO
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	// Configure the the Vertex Array so OpenGL knows how to read the VBO and enable it
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 	glEnableVertexAttribArray(0);
 
 	// Unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-
-	// Swap front and back buffers
-	glfwSwapBuffers(window);
 
 	// Loop until the user closes the window
 	while (!glfwWindowShouldClose(window))
