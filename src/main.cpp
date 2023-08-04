@@ -24,7 +24,7 @@ constexpr auto fragment_shader_src =
 "out vec4 FragColor;\n"
 "void main()\n"
 "{\n"
-"	FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
+"	FragColor = vec4(0.29f, 0.56f, 1.0f, 0.9f);\n"
 "}";
 
 
@@ -78,12 +78,15 @@ GLuint create_shader_program(const char* vertex_shdr_src, const char* fragment_s
 int main() {
 	constexpr int window_heigth = 520;
 	constexpr int window_width = 520;
-	constexpr util::rgb_float bg_color(77u, 190u, 255u);
+	constexpr util::rgb_float bg_color(115u, 251u, 211u);
 
+    // Doing static_cast because GCC doesn't have std::sqrtf.
+    // Stick to the standard dammit.
+    const float sqrt_of_3 = static_cast<float>(std::sqrt(3));
 	const std::array vertices {
-		-0.5f, -0.5f * std::sqrtf(3) / 3, 0.0f,		// lower left corner
-		 0.5f, -0.5f * std::sqrtf(3) / 3, 0.0f,		// lower right corner
-		 0.0f,  0.5f * std::sqrtf(3) * 2/3, 0.0f	// upper corner
+		-0.5f, -0.5f * sqrt_of_3 / 3, 0.0f,     // lower left corner
+		 0.5f, -0.5f * sqrt_of_3 / 3, 0.0f,     // lower right corner
+		 0.0f,  0.5f * sqrt_of_3 * 2/3, 0.0f    // upper corner
 	};
 
 
