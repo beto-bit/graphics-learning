@@ -11,8 +11,8 @@
 #include "util/color.hpp"
 
 
-// Doing static_cast because GCC doesn't have std::sqrtf.
-// Stick to the standard dammit.
+// Directly doing this because of GCC not having std::sqrtf
+// And not existing constexpr version
 constexpr float sqrt_of_3 = 1.73205080f;
 
 constexpr auto vertex_shader_src =
